@@ -1,7 +1,7 @@
 # Assembly code for kernel loading and initialization
 
 # Multiboot header values
-.set METRIC_NUM, 0x1badb002
+.set METRIC_NUM, 0x1badb002     # metric number for bootloader to recognize kernel as a actually kernel
 .set FLAGS, (1<<0 | 1<<1)
 .set CHECKSUM, -(METRIC_NUM + FLAGS)
 
@@ -32,6 +32,6 @@ stop:
 
 # Define the .bss section for kernel stack
 .section .bss
-.space 2*1024*1024  # 2 MiB
+.space 2*1024*1024  # Reserve 2 MiB of space for the kernel stack
 kernel_stack:
 
