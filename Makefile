@@ -10,7 +10,7 @@ ASFLAGS = --32
 LDFLAGS = -melf_i386
 
 # List of object files to be generated
-objects = loader.o kernel.o
+objects = loader.o gdt.o kernel.o
 
 # Rule to compile C++ source files into object files
 %.o: %.cpp

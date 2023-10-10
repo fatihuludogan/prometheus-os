@@ -19,6 +19,8 @@ typedef unsigned int uint32_t;
 typedef long long int int64_t;
 typedef unsigned long long int uint64_t;
 
+typedef unsigned long uintptr_t;
+
 // Ensure the sizes match common conventions
 static_assert(sizeof(int8_t) == 1, "int8_t size mismatch");
 static_assert(sizeof(uint8_t) == 1, "uint8_t size mismatch");

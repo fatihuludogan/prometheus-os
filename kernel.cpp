@@ -1,6 +1,7 @@
 // This file contains the entry point and main functionality of the kernel.
 
 #include "types.hpp"
+#include "gdt.hpp"
 
 // Function to print a string to the screen
 void printf(const char* str){
@@ -24,6 +25,8 @@ extern "C" void CallConstructors(){
 // Kernel entry point
 extern "C" void KernelMain(void* multiboot_structure, uint32_t metric_number) {
     printf("Hello World!"); 
+
+    GlobalDescriptorTable gdt;
 
     while(true);
 }
