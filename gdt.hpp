@@ -9,6 +9,8 @@ class GlobalDescriptorTable
         class SegmentDescriptor
         {
             private:
+                // lo: least significant bits of the segment descriptor 
+                // ho: most significant bits of the segment descriptor 
                 uint16_t limit_lo;
                 uint16_t base_lo;
                 uint8_t base_hi;

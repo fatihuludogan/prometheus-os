@@ -10,7 +10,7 @@ ASFLAGS = --32
 LDFLAGS = -melf_i386
 
 # List of object files to be generated
-objects = loader.o gdt.o kernel.o
+objects = loader.o gdt.o port.o kernel.o
 
 # Rule to compile C++ source files into object files
 %.o: %.cpp
@@ -23,10 +23,6 @@ objects = loader.o gdt.o kernel.o
 # Rule to link object files into the final kernel binary
 pro-kernel.bin: linker.ld $(objects)
 	${LD} $(LDFLAGS) -T $< -o $@ $(objects)
-
-# Rule to install the kernel binary to the /boot directory
-install: pro-kernel.bin
-	sudo cp $< /boot/pro-kernel.bin
 
 # Rule to install the CD image of prometheus-os
 pro-kernel.iso: pro-kernel.bin
@@ -42,7 +38,14 @@ pro-kernel.iso: pro-kernel.bin
 	rm -rf iso
 
 # Rule to run kernel on Oracle VM VirtualBox
-run: mykernel.iso
+run: pro-kernel.iso
 	(killall VirtualBox && sleep 1) || true
 	VirtualBox --startvm "prometheus-os" &
 
+# Rule to install the kernel binary to the /boot directory
+install: pro-kernel.bin
+	sudo cp $< /boot/pro-kernel.bin
+
+.PHONY: clean
+clean:
+	rm -f $(objects) pro-kernel.bin prokernel.iso
