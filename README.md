@@ -18,6 +18,28 @@ A few sources I use:
 
 ---
 
+### Features
+- Operating System for the Intel 80386 microprocessor
+- Memory Segmentation
+- Global Descriptor Table (GDT)
+- Hardware Communication with Ports
+- Interrupts
+- Keyboard and Mouse Drivers
+- Peripheral Component Interconnect (PCI) Support
+- Graphical User Interface (GUI) and Graphics Mode (VGA)
+- MultiTasking Support
+- Memory Management
+- System Calls (Syscalls)
+- AMD_PCNET Network Card Driver
+- Network Protocols Drivers:
+    - Ethernet
+    - Address Resolution Protocol (ARP)
+    - Internet Protocol version 4 (IPv4)
+    - Internet Control Message Protocol (ICMP)
+    - User Datagram Protocol (UDP)
+    - Transmission Control Protocol (TCP)
+- Hard Disk (IDE & ATA) Drivers
+
 _The project is currently <u>under development</u>. It is still incomplete._
 
 ## License
