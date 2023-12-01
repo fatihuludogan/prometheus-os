@@ -27,14 +27,15 @@ pro-kernel.bin: linker.ld $(objects)
 # Rule to install the CD image of prometheus-os
 pro-kernel.iso: pro-kernel.bin
 	mkdir -p iso/boot/grub
-	cp $< iso/boot
-	echo 'set timeout=0' >> iso/boot/grub/grub.cfg
-	echo 'set default=0' >> iso/boot/grub/grub.cfg
-	echo '' >> iso/boot/grub/grub.cfg
-	echo 'menuentry "prometheus-os" {' >> iso/boot/grub/grub.cfg
-	echo '	multiboot /boot/pro-kernel.bin' >> iso/boot/grub/grub.cfg
-	echo '}' >> iso/boot/grub/grub.cfg
-	grub-mkrescue --output=$@ iso
+	cp pro-kernel.bin iso/boot/pro-kernel.bin
+	echo 'set timeout=0' 						 > iso/boot/grub/grub.cfg
+	echo 'set default=0' 						>> iso/boot/grub/grub.cfg
+	echo '' 									>> iso/boot/grub/grub.cfg
+	echo 'menuentry "prometheus-os" {' 			>> iso/boot/grub/grub.cfg
+	echo '	multiboot /boot/pro-kernel.bin' 	>> iso/boot/grub/grub.cfg
+	echo '  boot'								>> iso/boot/grub/grub.cfg
+	echo '}' 									>> iso/boot/grub/grub.cfg
+	grub-mkrescue --output=pro-kernel.iso iso
 	rm -rf iso
 
 # Rule to run kernel on Oracle VM VirtualBox
@@ -48,4 +49,4 @@ install: pro-kernel.bin
 
 .PHONY: clean
 clean:
-	rm -f $(objects) pro-kernel.bin prokernel.iso
+	rm -f $(objects) pro-kernel.bin pro-kernel.iso
