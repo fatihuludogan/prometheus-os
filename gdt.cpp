@@ -11,20 +11,18 @@ GlobalDescriptorTable::GlobalDescriptorTable()
     asm volatile("lgdt (%0)" : : "p"(((uint8_t*)i) + 2));
 }
 
-GlobalDescriptorTable::~GlobalDescriptorTable() {}
-
-uint16_t GlobalDescriptorTable::DataSegmentSelector() const {
+auto GlobalDescriptorTable::DataSegmentSelector() const -> uint16_t {
     return static_cast<uint16_t>(reinterpret_cast<uintptr_t>(&dataSegmentSelector) -
                                  reinterpret_cast<uintptr_t>(this));
 }
 
-uint16_t GlobalDescriptorTable::CodeSegmentSelector() const {
+auto GlobalDescriptorTable::CodeSegmentSelector() const -> uint16_t {
     return static_cast<uint16_t>(reinterpret_cast<uintptr_t>(&codeSegmentSelector) -
                                  reinterpret_cast<uintptr_t>(this));
 }
 
 GlobalDescriptorTable::SegmentDescriptor::SegmentDescriptor(uintptr_t base, uintptr_t limit, uint8_t type) {
-    uint8_t* target = reinterpret_cast<uint8_t*>(this);
+    auto* target = reinterpret_cast<uint8_t*>(this);
 
     if (limit <= 65536) {
         // 16-bit address space
@@ -53,7 +51,7 @@ GlobalDescriptorTable::SegmentDescriptor::SegmentDescriptor(uintptr_t base, uint
     target[5] = type;
 }
 
-uintptr_t GlobalDescriptorTable::SegmentDescriptor::Base() const {
+auto GlobalDescriptorTable::SegmentDescriptor::Base() const -> uintptr_t {
     const uint8_t* target = reinterpret_cast<const uint8_t*>(this);
 
     uintptr_t result = static_cast<uintptr_t>(target[7]);
@@ -64,10 +62,10 @@ uintptr_t GlobalDescriptorTable::SegmentDescriptor::Base() const {
     return result;
 }
 
-uintptr_t GlobalDescriptorTable::SegmentDescriptor::Limit() const {
-    const uint8_t* target = reinterpret_cast<const uint8_t*>(this);
+auto GlobalDescriptorTable::SegmentDescriptor::Limit() const -> uintptr_t {
+    const auto* target = reinterpret_cast<const uint8_t*>(this);
 
-    uintptr_t result = static_cast<uintptr_t>(target[6] & 0xF);
+    auto result = static_cast<uintptr_t>(target[6] & 0xF);
     result = (result << 8) + static_cast<uintptr_t>(target[1]);
     result = (result << 8) + static_cast<uintptr_t>(target[0]);
 

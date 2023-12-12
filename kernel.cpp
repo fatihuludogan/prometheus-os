@@ -5,7 +5,7 @@
 
 // Function to print a string to the screen
 void printf(const char* str){
-    static uint16_t* video_memory = reinterpret_cast<uint16_t*>(0xb8000);
+    static auto* video_memory = reinterpret_cast<uint16_t*>(0xb8000);
 
     static uint8_t x = 0, y = 0;
 
@@ -42,13 +42,13 @@ extern "C" constructor start_ctors;
 extern "C" constructor end_ctors;
 
 // Function to call global constructors
-extern "C" void CallConstructors(){
+extern "C" void call_constructors(){
     for(constructor* i = &start_ctors; i != &end_ctors; i++)
       (*i)();
 }
 
 // Kernel entry point
-extern "C" void KernelMain(void* multiboot_structure, uint32_t metric_number) {
+extern "C" void kernel_main(void* multiboot_structure, uint32_t metric_number) {
     printf("Hello World!"); 
 
     GlobalDescriptorTable gdt;

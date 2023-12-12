@@ -28,13 +28,13 @@ pro-kernel.bin: linker.ld $(objects)
 pro-kernel.iso: pro-kernel.bin
 	mkdir -p iso/boot/grub
 	cp pro-kernel.bin iso/boot/pro-kernel.bin
-	echo 'set timeout=0' 						 > iso/boot/grub/grub.cfg
-	echo 'set default=0' 						>> iso/boot/grub/grub.cfg
-	echo '' 									>> iso/boot/grub/grub.cfg
-	echo 'menuentry "prometheus-os" {' 			>> iso/boot/grub/grub.cfg
+	echo 'set timeout=0' 						 					 > iso/boot/grub/grub.cfg
+	echo 'set default=0' 											>> iso/boot/grub/grub.cfg
+	echo '' 																	>> iso/boot/grub/grub.cfg
+	echo 'menuentry "prometheus-os" {' 				>> iso/boot/grub/grub.cfg
 	echo '	multiboot /boot/pro-kernel.bin' 	>> iso/boot/grub/grub.cfg
-	echo '  boot'								>> iso/boot/grub/grub.cfg
-	echo '}' 									>> iso/boot/grub/grub.cfg
+	echo '  boot'															>> iso/boot/grub/grub.cfg
+	echo '}' 																	>> iso/boot/grub/grub.cfg
 	grub-mkrescue --output=pro-kernel.iso iso
 	rm -rf iso
 

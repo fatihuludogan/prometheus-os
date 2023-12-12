@@ -13,17 +13,17 @@
 
 # Define the .text section
 .section .text
-.extern KernelMain
-.extern CallConstructors
+.extern kernel_main
+.extern call_constructors
 .global loader
 
 # Entry point for the kernel loader
 loader:
     mov $kernel_stack, %esp
-    call CallConstructors
+    call call_constructors
     push %eax
     push %ebx
-    call KernelMain
+    call kernel_main
 
 # Halt the CPU
 stop:

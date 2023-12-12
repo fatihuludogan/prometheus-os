@@ -32,7 +32,7 @@ class GlobalDescriptorTable
 
     public:
         GlobalDescriptorTable();
-        ~GlobalDescriptorTable();
+        ~GlobalDescriptorTable() = default;
 
         uint16_t CodeSegmentSelector() const;
         uint16_t DataSegmentSelector() const;
